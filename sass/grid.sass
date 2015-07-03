@@ -1,0 +1,32 @@
+$cols: 12
+
+=erb-grid($cols: $cols)
+  .row
+    width: 100%
+    zoom: 1 // IE 6 & 7 Shit
+    &:after
+      content: ''
+      display: block
+      height: 0
+      visibility: hidden
+      clear: both
+    
+    &.gtr
+      > [class^="erb-col"]
+        padding: 0 $std-unit
+    &.gtr-outer
+      margin: 0 -$std-unit
+      > [class^="erb-col"]
+        padding: 0 $std-unit
+    
+    [class^="col-"]
+      float: left
+
+  @for $i from 1 through $cols
+    .row
+      .col-#{$i}
+        width: (100% / $cols) * $i
+      @if $i > 1
+        .offset-#{$i - 1}
+          margin-left: (100% / $cols) * ($i - 1)         
++erb-grid
